@@ -1,0 +1,72 @@
+{
+  "short_name": "RockHound",
+  "name": "RockHound GO // NEURAL",
+  "description": "Advanced geological intelligence system. Identify, catalog, and analyze mineral assets with military-grade AI precision.",
+  "id": "rockhound-go-v4",
+  "start_url": "/?source=pwa",
+  "display": "fullscreen",
+  "display_override": ["window-controls-overlay", "minimal-ui", "standalone"],
+  "orientation": "portrait-primary",
+  "theme_color": "#030508",
+  "background_color": "#030508",
+  "categories": ["education", "exploration", "games", "productivity"],
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Scan",
+      "short_name": "Scan",
+      "description": "Initialize optical sensors for immediate analysis.",
+      "url": "/?view=scanner",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Global Grid",
+      "short_name": "Map",
+      "description": "Access global telemetry and geological hotspots.",
+      "url": "/?view=map",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Secure Vault",
+      "short_name": "Vault",
+      "description": "Review collected specimens and classified data.",
+      "url": "/?view=collection",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tactical Scanning Interface"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/7543/7543166.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Holographic Collection Vault"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "auto"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and stats",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "xp": { "type": "number" },
+        "level": { "type": "number" },
+        "rankTitle": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "credits": { "type": "number" },
+        "operatorStats": {
+          "type": "object",
+          "properties": {
+            "totalScans": { "type": "number" },
+            "distanceTraveled": { "type": "number" },
+            "uniqueSpeciesFound": { "type": "number" },
+            "legendaryFinds": { "type": "number" },
+            "highestRarityFound": { "type": "number" },
+            "scanStreak": { "type": "number" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "isAdmin": { "type": "boolean" },
+        "roles": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "username", "email", "xp", "level"]
+    },
+    "Rock": {
+      "title": "Rock",
+      "description": "Geological specimen discovered by a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "scientificName": { "type": "string" },
+        "description": { "type": "string" },
+        "rarityScore": { "type": "number" },
+        "hardness": { "type": "number" },
+        "color": { "type": "array", "items": { "type": "string" } },
+        "composition": { "type": "array", "items": { "type": "string" } },
+        "funFact": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "comparisonImageUrl": { "type": "string" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          }
+        },
+        "spectralWaveform": { "type": "array", "items": { "type": "number" } },
+        "refinementLevel": { "type": "number" },
+        "expertExplanation": { "type": "string" },
+        "bonusXP": {
+          "type": "object",
+          "properties": {
+            "rarity": { "type": "number" },
+            "expertEye": { "type": "number" }
+          }
+        },
+        "isGeologicalSpecimen": { "type": "boolean" },
+        "estimatedValue": { "type": "number" },
+        "marketInsight": { "type": "string" },
+        "geologicalLore": { "type": "string" },
+        "molecularStructure": { "type": "string" },
+        "dateFound": { "type": "number" },
+        "status": { "type": "string" },
+        "petrology": { "type": "string" },
+        "formationGenesis": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "type", "rarityScore", "dateFound"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/rocks/{rockId}": {
+      "schema": "Rock",
+      "description": "Collection of discovered rocks"
+    }
+  }
+}

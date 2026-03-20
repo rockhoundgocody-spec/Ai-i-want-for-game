@@ -1,0 +1,9 @@
+{
+  "name": "RockHound-Go",
+  "description": "RockHound-GO: Your AI Mineral Identification Companion. Identify minerals from photos, explore interactive maps of collecting sites, and track your personal collection. Designed for field use with offline capabilities.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

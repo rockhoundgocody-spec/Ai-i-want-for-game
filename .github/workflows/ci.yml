@@ -1,0 +1,51 @@
+# Type-check, targeted regression tests and production build. (There is no general test
+# suite: `npm test` covers only the build key guard, the service worker and PWA shortcuts.)
+# The build runs WITHOUT GEMINI_API_KEY on purpose: vite.config.ts refuses to
+# produce a production bundle that would contain the key.
+
+# Actions are pinned to commit SHAs (the trailing comment names the release), so CI only
+# runs action code that was reviewed here. To update, move every pin to the same new release.
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck-and-build:
+    name: Type-check and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install (lockfile-exact)
+        run: npm ci --no-audit --no-fund
+
+      - name: Type-check
+        run: npm run lint
+
+      - name: Tests (key guard, service worker, PWA shortcuts)
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: PWA files must be in the build output
+        run: test -f dist/manifest.json && test -f dist/sw.js

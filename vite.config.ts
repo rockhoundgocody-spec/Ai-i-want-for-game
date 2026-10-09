@@ -1,21 +1,17 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import { clientKeyGuardMessage } from './build/clientKeyGuard.mjs';
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
     const env = loadEnv(mode, '.', '');
 
     // Everything in `define` below is inlined into the public JavaScript bundle.
-    // A production build that contains a real Gemini key lets any visitor extract
-    // it from the page and spend your quota, so refuse unless the operator opts in
-    // knowingly. Local development (`vite`) is unaffected.
-    if (mode === 'production' && env.GEMINI_API_KEY && env.ALLOW_CLIENT_GEMINI_KEY !== 'true') {
-      throw new Error(
-        'Refusing to build: GEMINI_API_KEY would be inlined into the public JavaScript bundle, ' +
-        'where anyone can read and abuse it. Call Gemini from a server you control instead ' +
-        '(see docs/ROLE_AND_PLAN.md), or set ALLOW_CLIENT_GEMINI_KEY=true to accept the risk knowingly.'
-      );
-    }
+    // A bundle built while a real Gemini key is set lets any visitor extract it from
+    // the page and spend your quota, so ANY `vite build` (whatever its --mode) is
+    // refused unless the operator opts in knowingly. The dev server is unaffected.
+    const refusal = clientKeyGuardMessage(command, env);
+    if (refusal) throw new Error(refusal);
 
     return {
       server: {

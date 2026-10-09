@@ -1,0 +1,45 @@
+# Type-check and production build. (No test suite exists in this repository.)
+# The build runs WITHOUT GEMINI_API_KEY on purpose: vite.config.ts refuses to
+# produce a production bundle that would contain the key.
+
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck-and-build:
+    name: Type-check and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install (lockfile-exact)
+        run: npm ci --no-audit --no-fund
+
+      - name: Type-check
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: PWA files must be in the build output
+        run: test -f dist/manifest.json && test -f dist/sw.js

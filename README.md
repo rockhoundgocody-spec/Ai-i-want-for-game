@@ -1,3 +1,6 @@
+> **Status: prototype quarry. No new features here.**
+> Active development is in [`RHgo-v-2.0`](https://github.com/rockhoundgocody-spec/RHgo-v-2.0). This AI Studio prototype is kept as a source of ideas. **Never build it with a real `GEMINI_API_KEY`** (the key would be public); see [`docs/ROLE_AND_PLAN.md`](docs/ROLE_AND_PLAN.md).
+
 <div align="center">
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>

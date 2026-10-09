@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files may hold secrets (GEMINI_API_KEY). Only the example is tracked.
+# (*.local above already covers .env.local)
+.env
+.env.*
+!.env.example

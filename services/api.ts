@@ -76,9 +76,6 @@ function handleFirestoreError(error: unknown, operationType: OperationType, path
   throw new Error(JSON.stringify(errInfo));
 }
 
-// --- NEURAL NETWORK CONFIGURATION ---
-const USE_MOCK_SERVER = false; 
-
 export type { User };
 
 export interface AddRockResponse {

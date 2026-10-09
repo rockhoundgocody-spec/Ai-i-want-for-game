@@ -1,4 +1,5 @@
-# Type-check and production build. (No test suite exists in this repository.)
+# Type-check, targeted regression tests and production build. (There is no general test
+# suite: `npm test` covers only the build key guard, the service worker and PWA shortcuts.)
 # The build runs WITHOUT GEMINI_API_KEY on purpose: vite.config.ts refuses to
 # produce a production bundle that would contain the key.
 
@@ -38,7 +39,7 @@ jobs:
       - name: Type-check
         run: npm run lint
 
-      - name: Key-guard regression tests
+      - name: Tests (key guard, service worker, PWA shortcuts)
         run: npm test
 
       - name: Production build

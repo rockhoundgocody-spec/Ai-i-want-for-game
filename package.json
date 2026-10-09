@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
-    "test": "node --test build/clientKeyGuard.test.mjs"
+    "test": "node --test build/clientKeyGuard.test.mjs build/sw.test.mjs build/shortcutView.test.mjs"
   },
   "dependencies": {
     "@google/genai": "1.34.0",

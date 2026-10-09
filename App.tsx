@@ -11,6 +11,7 @@ import { SplashScreen } from './components/SplashScreen';
 import { CloverOverlay } from './components/CloverOverlay';
 import { SyncStatus } from './components/SyncStatus';
 import { initAudio, playSound, setLoopingSoundVolume, stopSound } from './services/audioUtils';
+import { shortcutView } from './services/shortcutView';
 import { SettingsPanel } from './components/SettingsPanel';
 
 const Home = lazy(() => import('./components/Home').then(m => ({ default: m.Home })));
@@ -26,8 +27,10 @@ const RockComparison = lazy(() => import('./components/RockComparison').then(m =
 const NAV_BASE_HEIGHT = 112; 
 
 const App: React.FC = () => {
-  // Navigation Persistence: Load from storage or default to HOME
+  // Navigation Persistence: a PWA shortcut (/?view=map) wins, then the saved view, then HOME
   const [currentView, setCurrentView] = useState<View>(() => {
+      const shortcut = shortcutView(window.location.search) as View | null;
+      if (shortcut) return shortcut;
       const saved = localStorage.getItem('rockhound_last_view');
       return (saved as View) || View.HOME;
   });
